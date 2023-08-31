@@ -1,11 +1,43 @@
+/*
+PALETA DE CORES 
+    VERDE : #23CE6B
+    PRETO : #272D2D
+    BRANCO : #F6F8FF
+*/
 *{
-
+    top: 0;
+    left: 0;
+    right:0;
 }
 body{
-    background-color: rgb(253, 251, 251);
+    background-color: #F6F8FF;
 }
-#cabecalho{
+header{
     position: fixed;
     top: 0px;
-    background-color: green;
+    height : 80px;
+    width: 100%;
+    background-color: #23CE6B;
+    text-align: center;
 }
+
+#titulo{
+    color: #272D2D;
+}
+nav{
+    position: relative;
+    top: 100px;
+    width: 100%;
+    border: 1px solid black;
+}
+/* nav ul li{
+    display: inline-block;
+    list-style: none;
+    padding: 0 30px 0 30px;
+    border: 1px solid black;
+} */
+ul{
+    margin-left: auto;
+    margin-right: auto;
+}
+

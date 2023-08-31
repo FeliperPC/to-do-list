@@ -10,13 +10,13 @@ Lista de requisitos
 
 O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação.
 
-1. Adicione uma cor de fundo específica para a página
-Possuir cor de fundo: rgb(253, 251, 251)
+1. Adicione uma cor de fundo específica para a página ✅
+Possuir cor de fundo: rgb(253, 251, 251) 
 
 O que será verificado:
 Possuir cor de fundo: rgb(253, 251, 251)
 
-2. Adicione uma barra superior com um título
+2. Adicione uma barra superior com um título ✅
 A barra deve possuir o ID "cabecalho" e deve ser fixa no topo da página com a propriedade top tendo 0px. O título deve estar dentro da barra e ser um elemento h1 com ID "titulo".
 
 O que será verificado:
@@ -25,7 +25,7 @@ A barra possui o ID "cabecalho"
 A barra superior deve ser fixa no topo da página, com a propriedade top tendo 0px
 O título deve estar dentro da barra e possuir o ID "titulo", além de ser uma tag "h1"
 
-3. Adicione uma foto sua à página
+3. Adicione uma foto sua à página 
 A foto deve ser inserida utilizando uma tag img com o ID "minha_foto".
 
 O que será verificado:
