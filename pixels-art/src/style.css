@@ -22,3 +22,9 @@
 #color6{
     background-color: #4CC9F0;
 }
+.pixel{
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+}
