@@ -1,0 +1,24 @@
+.color{
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+}
+#color1{
+    background-color: black;
+}
+#color2{
+    background-color: #F72585;
+}
+#color3{
+    background-color: #7209B7;
+}
+#color4{
+    background-color: #3A0CA3;
+}
+#color5{
+    background-color: #4361EE;
+}
+#color6{
+    background-color: #4CC9F0;
+}
