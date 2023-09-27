@@ -1,9 +1,12 @@
-const pixelBoard = document.querySelector('#pixel-board');
-for (let i = 0; i < 25; i += 1) {
-  const newSquare = document.createElement('div');
-  newSquare.classList.add('pixel');
-  pixelBoard.appendChild(newSquare);
+function createPixelBoard(size) {
+  const pixelBoard = document.querySelector('#pixel-board');
+  for (let i = 0; i < size; i += 1) {
+    const newSquare = document.createElement('div');
+    newSquare.classList.add('pixel');
+    pixelBoard.appendChild(newSquare);
+  }
 }
+createPixelBoard(25);
 
 document.querySelectorAll('.color')[0].classList.add('selected');
 
@@ -34,5 +37,16 @@ const button = document.querySelector('#clear-board');
 button.addEventListener('click', () => {
   for (let i = 0; i < squares.length; i += 1) {
     squares[i].style.background = '#FFF';
+  }
+});
+
+const boardButton = document.querySelector('#generate-board');
+const inputValue = document.querySelector('#board-size');
+
+boardButton.addEventListener('click', () => {
+  if (!inputValue.value) {
+    alert('Board inválido!');
+  } else {
+    createPixelBoard(inputValue.value);
   }
 });
