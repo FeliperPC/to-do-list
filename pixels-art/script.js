@@ -21,8 +21,8 @@ function clearBoard() {
 }
 // Adiciona eventos aos quadrados
 function addEventToSquares() {
+  const squares = getUpdatedSquaresElements();
   for (let i = 0; i < getUpdatedSquaresNumber(); i += 1) {
-    const squares = getUpdatedSquaresElements();
     squares[i].addEventListener('click', () => {
       for (let j = 0; j < colorList.length; j += 1) {
         if (colorList[j].classList.contains('selected')) {
@@ -32,9 +32,18 @@ function addEventToSquares() {
     });
   }
 }
+// Randomiza a posiçao das cores
+function randomColorsPosition() {
+  for (let i = colorList.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [colorList[i], colorList[j]] = [colorList[j], colorList[i]];
+  }
+}
+
 // Cria o quadro de pixels customizadamente já adicionando evento aos quadrados
 function createPixelBoard(size) {
   if (pixelBoard.children.length) clearBoard();
+  randomColorsPosition();
   for (let i = 0; i < size; i += 1) {
     const newSquare = document.createElement('div');
     newSquare.classList.add('pixel');
@@ -62,9 +71,10 @@ for (let i = 0; i < colorList.length; i += 1) {
 // Função que limpa o quadro
 button.addEventListener('click', () => {
   const squares = getUpdatedSquaresElements();
-  for (let i = 0; i < getUpdatedSquaresNumber; i += 1) {
-    if (squares[i].id) squares[i].id = '';
-    squares[i].style.background = '#FFF';
+  for (let i = 0; i < getUpdatedSquaresNumber(); i += 1) {
+    if (squares[i].id !== '') {
+      squares[i].id = '';
+    }
   }
 });
 
@@ -72,7 +82,12 @@ button.addEventListener('click', () => {
 boardButton.addEventListener('click', () => {
   if (!inputValue.value) {
     alert('Board inválido!');
+  }
+  if (inputValue.value <= 5) {
+    createPixelBoard(5 * 5);
+  } else if (inputValue.value >= 50) {
+    createPixelBoard(50 * 50);
   } else {
-    createPixelBoard(inputValue.value);
+    createPixelBoard(inputValue.value * inputValue.value);
   }
 });
