@@ -1,7 +1,7 @@
 .color{
     border: 1px solid black;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     display: inline-block;
 }
 #color1{
@@ -23,8 +23,15 @@
     background-color: #4CC9F0;
 }
 .pixel{
+    margin-bottom:-5px;
     border: 1px solid black;
     height: 40px;
     width: 40px;
     display: inline-block;
+}
+#pixel-board{
+    width:210px;
+}
+.selected{
+    size: 50px;
 }
