@@ -1,17 +1,18 @@
 const currentTask = document.querySelector('#texto-tarefa');
 const addTaskButton = document.querySelector('#criar-tarefa');
 const olList = document.querySelector('#lista-tarefas');
+let completedTask = 0;
 
 // Retorna o texto do input
 const getTaskText = () => document.querySelector('#texto-tarefa').value;
+
+// Retorna a lista atualizada ol pai
+const getListElements = () => document.querySelectorAll('.task');
 
 // Limpa o campo do input
 const clearInputText = () => {
   currentTask.value = '';
 };
-
-// Retorna a lista atualizada ol pai
-const getListElements = () => document.querySelectorAll('.task');
 
 // Remove a class selected do elemento
 const removeClassSelected = () => {
@@ -32,9 +33,25 @@ const changeBackgroundColor = (event) => {
   elemento.target.style.background = 'gray';
 };
 
+const isCompleted = (event) => {
+  const elementEvent = event.target;
+  switch (completedTask) {
+  case 1:
+    elementEvent.style.textDecoration = 'line-through';
+    break;
+  case 2:
+    elementEvent.style.textDecoration = 'none';
+    console.log('passou aqui');
+    completedTask = 0;
+    break;
+  default:
+    completedTask += 1;
+  }
+};
 // Adiciona Listener aos elementos criados
 const addListenerTask = (task) => {
   task.addEventListener('click', changeBackgroundColor);
+  task.addEventListener('click', isCompleted);
 };
 
 // Adiciona a tarefa criada na lista
