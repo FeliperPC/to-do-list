@@ -1,7 +1,6 @@
 const currentTask = document.querySelector('#texto-tarefa');
 const addTaskButton = document.querySelector('#criar-tarefa');
 const olList = document.querySelector('#lista-tarefas');
-let completedTask = 0;
 
 // Retorna o texto do input
 const getTaskText = () => document.querySelector('#texto-tarefa').value;
@@ -33,21 +32,19 @@ const changeBackgroundColor = (event) => {
   elemento.target.style.background = 'gray';
 };
 
+// Adciona a classe completed nos elementos que foram clicados 2x
 const isCompleted = (event) => {
   const elementEvent = event.target;
-  switch (completedTask) {
-  case 1:
-    elementEvent.style.textDecoration = 'line-through';
-    break;
-  case 2:
-    elementEvent.style.textDecoration = 'none';
-    console.log('passou aqui');
-    completedTask = 0;
-    break;
-  default:
-    completedTask += 1;
+  if (!elementEvent.getAttribute('secondClick')) {
+    elementEvent.classList.add('completed');
+    elementEvent.setAttribute('secondClick', false);
+  } else {
+    elementEvent.classList.remove('completed');
+    elementEvent.setAttribute('secondClick', false);
   }
+  elementEvent.setAttribute('secondClick', true);
 };
+
 // Adiciona Listener aos elementos criados
 const addListenerTask = (task) => {
   task.addEventListener('click', changeBackgroundColor);
@@ -59,6 +56,7 @@ const addTaskToList = () => {
   const taskItem = document.createElement('li');
   taskItem.innerText = getTaskText();
   taskItem.classList.add('task');
+  taskItem.setAttribute('secondClick', false);
   addListenerTask(taskItem);
   olList.appendChild(taskItem);
   clearInputText();
