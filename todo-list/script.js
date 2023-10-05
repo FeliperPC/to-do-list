@@ -66,10 +66,14 @@ const addTaskToList = () => {
 
 // Adciona a tarefa salva novamente na lista de tarefas
 const addExistingTaskToList = (task) => {
+  const classes = task.class.split(' ');
   const existingTask = document.createElement('li');
-  existingTask.innerText = task;
-  existingTask.classList.add('task');
+  existingTask.innerText = task.value;
   addListenerTask(existingTask);
+  for (let i = 0; i < classes.length; i += 1) {
+    existingTask.classList.add(classes[i]);
+  }
+  existingTask.classList.remove('selected');
   olList.appendChild(existingTask);
 };
 
@@ -78,14 +82,17 @@ const removeAllTasks = () => {
   while (olList.firstChild) {
     olList.firstChild.remove();
   }
+  localStorage.clear();
 };
 
 // Remove todas as tarefas completadas
 const removeAllCompleted = () => {
   const list = getListElements();
-  console.log(list);
   for (let i = 0; i < list.length; i += 1) {
-    if (list[i].classList.contains('completed')) list[i].remove();
+    if (list[i].classList.contains('completed')) {
+      list[i].remove();
+      localStorage.removeItem(`task : ${i}`);
+    }
   }
 };
 
@@ -93,7 +100,10 @@ const removeAllCompleted = () => {
 const removeSelected = () => {
   const list = getListElements();
   for (let i = 0; i < list.length; i += 1) {
-    if (list[i].classList.contains('selected')) list[i].remove();
+    if (list[i].classList.contains('selected')) {
+      list[i].remove();
+      localStorage.removeItem(`task : ${i}`);
+    }
   }
 };
 
@@ -138,14 +148,19 @@ const saveTasks = () => {
   localStorage.clear();
   const list = getListElements();
   for (let i = 0; i < list.length; i += 1) {
-    localStorage.setItem(`task : ${i}`, list[i].innerText);
+    const elementObj = {
+      value: list[i].innerText,
+      class: list[i].className,
+    };
+    localStorage.setItem(`task : ${i}`, JSON.stringify(elementObj));
   }
 };
 
 const getUpdatedTaskList = () => {
   for (let i = 0; i < localStorage.length; i += 1) {
-    addExistingTaskToList(localStorage.getItem(i)); // Está dando null 
+    addExistingTaskToList(JSON.parse(localStorage.getItem(`task : ${i}`)));
   }
+  return true;
 };
 
 btnSaveTasks.addEventListener('click', saveTasks);
