@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Lista de Tarefas</title>
     <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
     <header>
@@ -13,15 +15,15 @@
     </header>
     <main>
         <input type="text" id="texto-tarefa" placeholder="Informe aqui sua nova tarefa">
+        <button id="criar-tarefa"class="btn btn-primary">Adicionar</button>
         <ol  id="lista-tarefas">
         </ol>
-        <button id="mover-cima" title="Mover para cima">↑</button>
-        <button id="mover-baixo" title="Mover para baixo">↓</button>
-        <button id="criar-tarefa">Adicionar Tarefa</button>
-        <button id="apaga-tudo">Excluir Tudo</button>
-        <button id="remover-finalizados">Remover Finalizados</button>
-        <button id="remover-selecionado">Remover Selecionado</button>
-        <button id="salvar-tarefas" title="Salve suas tarefas para vizualizá-las depois">Salvar Tarefas</button>
+        <button id="remover-selecionado" class="btn btn-danger">x</button>
+        <button id="mover-cima" title="Mover para cima" class="btn btn-warning">↑</button>
+        <button id="mover-baixo" title="Mover para baixo" class="btn btn-warning">↓</button>
+        <button id="remover-finalizados" class="btn btn-warning">Remover Finalizados</button>
+        <button id="apaga-tudo" class="btn btn-danger">Excluir Tudo</button>
+        <button id="salvar-tarefas" class="btn btn-success" title="Salve suas tarefas para vizualizá-las depois">Salvar</button>
     </main>
     <script type="module" src="script.js"></script>
 </body>
