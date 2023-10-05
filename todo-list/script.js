@@ -6,6 +6,7 @@ const btnRemoveCompleted = document.querySelector('#remover-finalizados');
 const btnRemoveSelected = document.querySelector('#remover-selecionado');
 const btnMoveUp = document.querySelector('#mover-cima');
 const btnMoveDown = document.querySelector('#mover-baixo');
+const btnSaveTasks = document.querySelector('#salvar-tarefas');
 
 // Retorna o texto do input
 const getTaskText = () => document.querySelector('#texto-tarefa').value;
@@ -63,6 +64,15 @@ const addTaskToList = () => {
   clearInputText();
 };
 
+// Adciona a tarefa salva novamente na lista de tarefas
+const addExistingTaskToList = (task) => {
+  const existingTask = document.createElement('li');
+  existingTask.innerText = task;
+  existingTask.classList.add('task');
+  addListenerTask(existingTask);
+  olList.appendChild(existingTask);
+};
+
 // Remove todas as tarefas
 const removeAllTasks = () => {
   while (olList.firstChild) {
@@ -91,9 +101,7 @@ const removeSelected = () => {
 const checkSelection = () => {
   const list = getListElements();
   for (let i = 0; i < list.length; i += 1) {
-    if (list[i].classList.contains('selected')) {
-      return true;
-    }
+    if (list[i].classList.contains('selected')) return i;
   }
   alert('Selecione uma tarefa primeiro !');
   return false;
@@ -101,32 +109,52 @@ const checkSelection = () => {
 
 // Move a task para cima
 const moveTaskUp = () => {
-  if (checkSelection()) {
+  if (checkSelection() !== false) {
+    const indexSelected = checkSelection();
     const list = getListElements();
-    const array = Array.from(list);
-    console.log(array);
-    for (let i = 0; i < array.length; i += 1) {
-      if (array[i].classList.contains('selected')) {
-        array.splice(i, 1);
-        array.splice(i - 1, 0, array[i]);
-      }
+    if (indexSelected !== 0) {
+      olList.insertBefore(list[indexSelected], list[indexSelected - 1]);
+    } else {
+      alert('Esta tarefa já está no topo !');
     }
   }
 };
 
 // // Move a task para baixo
-// const moveTaskDown = () => {
-//   if (checkSelection()) {
+const moveTaskDown = () => {
+  if (checkSelection() !== false) {
+    const indexSelected = checkSelection();
+    const list = getListElements();
+    if (indexSelected !== list.length - 1) {
+      olList.insertBefore(list[indexSelected + 1], list[indexSelected]);
+    } else {
+      alert('Esta tarefa já é a ultima !');
+    }
+  }
+};
 
-//   } else {
-//     alert('Selecione uma tarefa primeiro !');
-//   }
-// };
+// Salva as tarefas para vizualizações futuras
+const saveTasks = () => {
+  localStorage.clear();
+  const list = getListElements();
+  for (let i = 0; i < list.length; i += 1) {
+    localStorage.setItem(`task : ${i}`, list[i].innerText);
+  }
+};
 
-// btnMoveDown.addEventListener('click', moveTaskDown);
+const getUpdatedTaskList = () => {
+  for (let i = 0; i < localStorage.length; i += 1) {
+    addExistingTaskToList(localStorage.getItem(i)); // Está dando null 
+  }
+};
+
+btnSaveTasks.addEventListener('click', saveTasks);
+btnMoveDown.addEventListener('click', moveTaskDown);
 btnMoveUp.addEventListener('click', moveTaskUp);
 btnRemoveSelected.addEventListener('click', removeSelected);
 btnRemoveCompleted.addEventListener('click', removeAllCompleted);
 btnRemoveTasks.addEventListener('click', removeAllTasks);
 addTaskButton.addEventListener('click', addTaskToList);
 currentTask.addEventListener('change', getTaskText);
+
+window.onload = getUpdatedTaskList();
