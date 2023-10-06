@@ -1,6 +1,36 @@
-*{
-    
+* {
+
+}
+#main-content{
+    border-radius: 20px;
+    background-color: white;
+    padding: 50px;
+}
+#btn-style{
+    flex-direction: row;
+}
+#main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    background-color: rgb(6, 169, 101); 
+}
+#task-list{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#texto-tarefa{
+    width: 60%;
+    display: inline-block;
 }
 .completed {
     text-decoration: line-through;
+}
+#criar-tarefa{
+    margin-left: 5px;
+}
+#list-title{
+    color : rgb(6, 169, 101); 
 }

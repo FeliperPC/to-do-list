@@ -45,7 +45,7 @@ const changeBackgroundColor = (event) => {
   const elemento = event;
   removeClassSelected();
   elemento.target.classList.add('selected');
-  elemento.target.style.background = 'gray';
+  elemento.target.style.background = '#FFC107';
 };
 
 // Adiciona Listener aos elementos criados
@@ -57,6 +57,10 @@ const addListenerTask = (task) => {
 // Adiciona a tarefa criada na lista
 const addTaskToList = () => {
   const taskItem = document.createElement('li');
+  if (!getTaskText()) {
+    alert('Insira a tarefa antes');
+    return;
+  }
   taskItem.innerText = getTaskText();
   taskItem.classList.add('task');
   addListenerTask(taskItem);
